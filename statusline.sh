@@ -12,15 +12,15 @@ if [ -z "$input" ]; then
     exit 0
 fi
 
-# ANSI colors matching oh-my-posh theme
-blue='\033[38;2;0;153;255m'
-orange='\033[38;2;255;176;85m'
-green='\033[38;2;0;160;0m'
-cyan='\033[38;2;46;149;153m'
-red='\033[38;2;255;85;85m'
-yellow='\033[38;2;230;200;0m'
-purple='\033[38;2;167;139;250m'
-white='\033[38;2;220;220;220m'
+# ANSI colors — Catppuccin Mocha palette (https://catppuccin.com/palette)
+blue='\033[38;2;137;180;250m'    # Blue    #89b4fa
+orange='\033[38;2;250;179;135m'  # Peach   #fab387
+green='\033[38;2;166;227;161m'   # Green   #a6e3a1
+cyan='\033[38;2;148;226;213m'    # Teal    #94e2d5
+red='\033[38;2;243;139;168m'     # Red     #f38ba8
+yellow='\033[38;2;249;226;175m'  # Yellow  #f9e2af
+purple='\033[38;2;203;166;247m'  # Mauve   #cba6f7
+white='\033[38;2;205;214;244m'   # Text    #cdd6f4
 dim='\033[2m'
 reset='\033[0m'
 

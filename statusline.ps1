@@ -14,15 +14,15 @@ if (-not $input) {
 # ANSI escape - use [char]0x1b for PowerShell 5 compatibility ("`e" is PS7+ only)
 $esc = [char]0x1b
 
-# ANSI colors matching oh-my-posh theme
-$blue   = "${esc}[38;2;0;153;255m"
-$orange = "${esc}[38;2;255;176;85m"
-$green  = "${esc}[38;2;0;160;0m"
-$cyan   = "${esc}[38;2;46;149;153m"
-$red    = "${esc}[38;2;255;85;85m"
-$yellow = "${esc}[38;2;230;200;0m"
-$purple = "${esc}[38;2;167;139;250m"
-$white  = "${esc}[38;2;220;220;220m"
+# ANSI colors — Catppuccin Mocha palette (https://catppuccin.com/palette)
+$blue   = "${esc}[38;2;137;180;250m"   # Blue    #89b4fa
+$orange = "${esc}[38;2;250;179;135m"   # Peach   #fab387
+$green  = "${esc}[38;2;166;227;161m"   # Green   #a6e3a1
+$cyan   = "${esc}[38;2;148;226;213m"   # Teal    #94e2d5
+$red    = "${esc}[38;2;243;139;168m"   # Red     #f38ba8
+$yellow = "${esc}[38;2;249;226;175m"   # Yellow  #f9e2af
+$purple = "${esc}[38;2;203;166;247m"   # Mauve   #cba6f7
+$white  = "${esc}[38;2;205;214;244m"   # Text    #cdd6f4
 $dim    = "${esc}[2m"
 $reset  = "${esc}[0m"
 
