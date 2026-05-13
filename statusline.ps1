@@ -23,6 +23,7 @@ $red    = "${esc}[38;2;243;139;168m"   # Red       #f38ba8  (danger)
 $yellow = "${esc}[38;2;249;226;175m"   # Yellow    #f9e2af  (mid-warning)
 $purple = "${esc}[38;2;137;220;235m"   # Sky       #89dceb  (xhigh effort)
 $white  = "${esc}[38;2;245;224;220m"   # Rosewater #f5e0dc  (labels)
+$tokens = "${esc}[38;2;235;160;172m"   # Maroon    #eba0ac  (token count only)
 $dim    = "${esc}[2m"
 $reset  = "${esc}[0m"
 
@@ -148,7 +149,7 @@ if ($cwd) {
 }
 
 $out += " ${dim}|${reset} "
-$out += "${orange}${usedTokens}/${totalTokens}${reset} ${dim}(${reset}${green}${pctUsed}%${reset}${dim})${reset}"
+$out += "${tokens}${usedTokens}/${totalTokens}${reset} ${dim}(${reset}${green}${pctUsed}%${reset}${dim})${reset}"
 $out += " ${dim}|${reset} "
 $out += "effort: "
 switch ($effortLevel) {

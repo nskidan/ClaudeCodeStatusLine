@@ -21,6 +21,7 @@ red='\033[38;2;243;139;168m'     # Red       #f38ba8  (danger)
 yellow='\033[38;2;249;226;175m'  # Yellow    #f9e2af  (mid-warning)
 purple='\033[38;2;137;220;235m'  # Sky       #89dceb  (xhigh effort)
 white='\033[38;2;245;224;220m'   # Rosewater #f5e0dc  (labels)
+tokens='\033[38;2;235;160;172m'  # Maroon    #eba0ac  (token count only)
 dim='\033[2m'
 reset='\033[0m'
 
@@ -129,7 +130,7 @@ if [ -n "$cwd" ]; then
 fi
 
 out+=" ${dim}|${reset} "
-out+="${orange}${used_tokens}/${total_tokens}${reset} ${dim}(${reset}${green}${pct_used}%${reset}${dim})${reset}"
+out+="${tokens}${used_tokens}/${total_tokens}${reset} ${dim}(${reset}${green}${pct_used}%${reset}${dim})${reset}"
 out+=" ${dim}|${reset} "
 out+="effort: "
 case "$effort_level" in
