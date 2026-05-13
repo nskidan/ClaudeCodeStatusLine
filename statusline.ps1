@@ -15,7 +15,7 @@ if (-not $input) {
 $esc = [char]0x1b
 
 # ANSI colors — Catppuccin Mocha, Warm & Playful variant (https://catppuccin.com/palette)
-$blue   = "${esc}[38;2;203;166;247m"   # Mauve     #cba6f7  (model name)
+$blue   = "${esc}[38;2;137;180;250m"   # Blue      #89b4fa  (model name)
 $orange = "${esc}[38;2;250;179;135m"   # Peach     #fab387  (tokens / warning)
 $green  = "${esc}[38;2;166;227;161m"   # Green     #a6e3a1  (branch / good)
 $cyan   = "${esc}[38;2;245;194;231m"   # Pink      #f5c2e7  (directory)
