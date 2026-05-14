@@ -333,19 +333,19 @@ format_reset_time() {
     local formatted=""
     case "$style" in
         time)
-            formatted=$(date -d "@$epoch" +"%H:%M" 2>/dev/null) || \
-            formatted=$(date -j -r "$epoch" +"%H:%M" 2>/dev/null)
+            formatted=$(date -d "@$epoch" +"%-I:%M%p" 2>/dev/null) || \
+            formatted=$(date -j -r "$epoch" +"%-I:%M%p" 2>/dev/null)
             ;;
         datetime)
-            formatted=$(date -d "@$epoch" +"%b %-d, %H:%M" 2>/dev/null) || \
-            formatted=$(date -j -r "$epoch" +"%b %-d, %H:%M" 2>/dev/null)
+            formatted=$(date -d "@$epoch" +"%b %-d, %-I:%M%p" 2>/dev/null) || \
+            formatted=$(date -j -r "$epoch" +"%b %-d, %-I:%M%p" 2>/dev/null)
             ;;
         *)
             formatted=$(date -d "@$epoch" +"%b %-d" 2>/dev/null) || \
             formatted=$(date -j -r "$epoch" +"%b %-d" 2>/dev/null)
             ;;
     esac
-    [ -n "$formatted" ] && echo "$formatted"
+    [ -n "$formatted" ] && echo "$formatted" | sed 's/AM$/am/; s/PM$/pm/'
 }
 
 sep=" ${dim}|${reset} "
@@ -365,9 +365,13 @@ render_extra_usage() {
     limit=$(echo "$data" | jq -r '.extra_usage.monthly_limit // 0' | LC_NUMERIC=C awk '{printf "%.2f", $1/100}')
 
     if [ -n "$used" ] && [ -n "$limit" ] && [[ "$used" != *'$'* ]] && [[ "$limit" != *'$'* ]]; then
-        local color
-        color=$(usage_color "$pct")
-        out+="${sep}${white}extra${reset} ${color}\$${used}/\$${limit}${reset}"
+        if [ "$limit" = "0.00" ]; then
+            out+="${sep}${white}extra${reset} ${green}\$${used}${reset}"
+        else
+            local color
+            color=$(usage_color "$pct")
+            out+="${sep}${white}extra${reset} ${color}\$${used}/\$${limit}${reset}"
+        fi
     else
         out+="${sep}${white}extra${reset} ${green}enabled${reset}"
     fi
@@ -381,7 +385,8 @@ if $effective_builtin; then
         five_hour_color=$(usage_color "$five_hour_pct")
         out+="${sep}${white}5h${reset} ${five_hour_color}${five_hour_pct}%${reset}"
         if [ -n "$builtin_five_hour_reset" ] && [ "$builtin_five_hour_reset" != "null" ]; then
-            five_hour_reset=$(date -j -r "$builtin_five_hour_reset" +"%H:%M" 2>/dev/null || date -d "@$builtin_five_hour_reset" +"%H:%M" 2>/dev/null)
+            five_hour_reset=$(date -j -r "$builtin_five_hour_reset" +"%-I:%M%p" 2>/dev/null || date -d "@$builtin_five_hour_reset" +"%-I:%M%p" 2>/dev/null)
+            five_hour_reset=$(echo "$five_hour_reset" | sed 's/AM$/am/; s/PM$/pm/')
             [ -n "$five_hour_reset" ] && out+=" ${dim}@${five_hour_reset}${reset}"
         fi
     fi
@@ -391,7 +396,8 @@ if $effective_builtin; then
         seven_day_color=$(usage_color "$seven_day_pct")
         out+="${sep}${white}7d${reset} ${seven_day_color}${seven_day_pct}%${reset}"
         if [ -n "$builtin_seven_day_reset" ] && [ "$builtin_seven_day_reset" != "null" ]; then
-            seven_day_reset=$(date -j -r "$builtin_seven_day_reset" +"%b %-d, %H:%M" 2>/dev/null || date -d "@$builtin_seven_day_reset" +"%b %-d, %H:%M" 2>/dev/null)
+            seven_day_reset=$(date -j -r "$builtin_seven_day_reset" +"%b %-d, %-I:%M%p" 2>/dev/null || date -d "@$builtin_seven_day_reset" +"%b %-d, %-I:%M%p" 2>/dev/null)
+            seven_day_reset=$(echo "$seven_day_reset" | sed 's/AM$/am/; s/PM$/pm/')
             [ -n "$seven_day_reset" ] && out+=" ${dim}@${seven_day_reset}${reset}"
         fi
     fi
